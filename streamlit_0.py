@@ -44,20 +44,32 @@ else:
 
         contagem_campanhas = df['Tipo Campanha'].value_counts().reset_index()   
         contagem_campanhas.columns = ['Tipo Campanha', 'Quantidade']
+        frequencia = df["Campanha"].value_counts().plot(kind="bar", color="slateblue")
 
-        fig_barras = px.bar(
+        fig_pizza = px.pie(
             contagem_campanhas,
-            x='Tipo Campanha',
-            y='Quantidade',
-            color='Tipo Campanha',
+            names='Tipo Campanha',
+            values='Quantidade',
             title='Distribuição de Campanhas por Tipo',
-            text='Quantidade'
+            color='Tipo Campanha'
         )
 
         df_selecao = df.set_index('Data')
         comparativo_anual = df_selecao.groupby('Tipo Campanha').resample('Y').size().reset_index(name='Quantidade')
+        
 
-        fig_comparativo = px.line(
+        fig_frequencia = px.bar(
+            frequencia,
+            x = 'Campanha',
+            y = 'Número de Registros',
+            color='Tipo Campanha',
+            title= 'Frequência de Cada Campanha',
+            text=''
+        )
+        
+
+        
+        fig_comparativo = px.bar(
             comparativo_anual,
             x='Data',
             y='Quantidade',
@@ -66,7 +78,7 @@ else:
             text='Quantidade'
         )
 
-        st.plotly_chart(fig_barras, use_container_width=True)
+        st.plotly_chart(fig_pizza, use_container_width=True)
         st.plotly_chart(fig_comparativo, use_container_width=True)
 
     def Menu():
