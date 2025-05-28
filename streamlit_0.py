@@ -36,13 +36,36 @@ df_filtrado = df[
 
 def Home():
     st.title("")
-    total_campanhas = len(df_filtrado)
+
+    total_campanhas_sp = len(df_filtrado)
+    total_estados = '15'
+    total_campanhas_br = '976'
+    total_cidades_sp = '42'
+    total_tematica = '8'
+    periodo_dados = 'Dados referente ao período de jan/21 a mai/25'
+
     st.markdown("### Visão Geral")
-    st.metric(label="Total de Campanhas Selecionadas", value=total_campanhas)
+    col1, col2, col3, col4, col5 = st.columns(5)
+
+    with col1:
+        st.metric(label="Registros/BR", value=total_campanhas_br)
+
+    with col2:
+        st.metric(label="UF", value=total_estados)
+    with col3:
+        st.metric(label="Registros/SP", value=total_campanhas_sp)
+
+    with col4:
+        st.metric(label="Cidades/SP", value=total_cidades_sp)
+
+    with col5:
+        st.metric(label="Temáticas", value=total_tematica)
+
+    st.text(periodo_dados)
+
     st.markdown("---")
 
-def Graficos():
-    st.title("📈 Análises de Campanhas")
+    st.title("📈 Análises de Dados")
 
     contagem_campanhas = df_filtrado['Tipo Campanha'].value_counts().reset_index()
     contagem_campanhas.columns = ['Tipo Campanha', 'Quantidade']
@@ -71,13 +94,22 @@ def Graficos():
     origem_contagem = df_filtrado['Origem Base Dados'].value_counts().reset_index()
     origem_contagem.columns = ['Origem Base Dados', 'Quantidade']
 
-    fig_origem = px.pie(
+    fig_origem = px.bar(
         origem_contagem,
-        names='Origem Base Dados',
-        values='Quantidade',
+        x='Quantidade',
+        y='Origem Base Dados',
         title='Origem dos Dados',
-        color_discrete_sequence=cores
+        orientation='h',
+        color = 'Origem Base Dados',
+        color_discrete_sequence=cores,
+        text='Quantidade'        
     )
+
+    
+    tabela = {'Cidade': ['São Paulo', 'Praia Grande', 'São Vicente', 'Guarulhos', 'Indaiatuba', 'CampinasS'],'Quantidade':[117,13,13,10,9,8]}
+    df_tabela = pd.DataFrame(tabela)
+    
+
 
     if 'Campanha' in df_filtrado.columns:
         freq = df_filtrado['Campanha'].value_counts().reset_index()
@@ -90,18 +122,23 @@ def Graficos():
             text='Número de Registros',
             color_discrete_sequence=cores
         )
-        st.plotly_chart(fig_frequencia, use_container_width=True)
+        fig_frequencia.update_traces(textangle=0)
 
-    st.plotly_chart(fig_pizza, use_container_width=True)
-    st.plotly_chart(fig_ano, use_container_width=True)
+
+
     st.plotly_chart(fig_origem, use_container_width=True)
+    st.plotly_chart(fig_pizza, use_container_width=True)
+    st.plotly_chart(fig_frequencia, use_container_width=True) 
+    st.plotly_chart(fig_ano, use_container_width=True)
+    st.markdown("<p style='font-size:18px; font-weight:bold;'>Cidades com Maior Número de Registros</p>", unsafe_allow_html=True)
+    st.table(df_tabela)
 
 def Menu():
     with st.sidebar:
         selecionado = option_menu(
-            menu_title='📂 Menu',
-            options=['Home', 'Gráficos'],
-            icons=['house', 'bar-chart'],
+            menu_title='Menu',
+            options=['Projeto Limpa Brasil'],
+            icons=['house',],
             default_index=0
         )
     return selecionado
@@ -117,8 +154,8 @@ if df_filtrado.empty:
     st.warning("Nenhuma campanha encontrada para os critérios selecionados.")
 else:
     selecao = Menu()
-    if selecao == 'Home':
+    if selecao == 'Projeto Limpa Brasil':
         Home()
-    elif selecao == 'Gráficos':
-        Graficos()
-    load_css("plot.css")
+
+
+

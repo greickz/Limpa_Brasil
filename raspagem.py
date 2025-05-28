@@ -34,16 +34,16 @@ try:
             data_e_hora = 'N/A'
         try: 
             #campanha = card.find_element(By.XPATH, '//body//div[@class="property-card card"]//div[@class="property-card-box card-box card-block"]//div[@class="property-preview-footer  clearfix"]//div[@class="property-preview-f-left text-color-primary"]/span[@class="label label-default label-tag-warning"]/a').text.strip() # terminar a parte da campanha
-            campanha = card.find_element(By.CLASS_NAME, 'property-preview-f-left').text.strip() # terminar a parte da campanha
+            campanha = card.find_element(By.CLASS_NAME, 'property-preview-f-left').text.strip()
         except NoSuchElementException:
             campanha = 'N/A'
         try:
             cidade_estado = card.find_element(By.CLASS_NAME, 'post_single_cat').text.strip()
         except NoSuchElementException:
             cidade_estado = 'N/A'
-        # eventos['Título'].append(titulo)
-        # eventos['Data e Hora'].append(data_e_hora)
-        # eventos['Cidade e Estado'].append(cidade_estado)
+        eventos['Título'].append(titulo)
+        eventos['Data e Hora'].append(data_e_hora)
+        eventos['Cidade e Estado'].append(cidade_estado)
         eventos['Campanha'].append(campanha)
 except TimeoutException:
     print('Erro: os elementos não carregaram a tempo.')
