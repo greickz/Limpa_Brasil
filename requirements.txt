@@ -2,3 +2,4 @@ pandas
 plotly==5.15.0
 streamlit
 numpy
+streamlit-option-menu
