@@ -35,7 +35,7 @@ df_filtrado = df[
 ]
 
 def Home():
-    st.title("")
+    st.title("Limpa Brasil")
 
     total_campanhas_sp = len(df_filtrado)
     total_estados = '15'
@@ -45,6 +45,8 @@ def Home():
     periodo_dados = 'Dados referente ao período de jan/21 a mai/25'
 
     st.markdown("### Visão Geral")
+    
+    
     col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
@@ -143,14 +145,12 @@ def Menu():
         )
     return selecionado
 
-def load_css(file_name):
-    try:
-        with open(file_name) as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-    except FileNotFoundError:
-        pass
 
-load_css("streamlit.css")
+# with open("streamlit.css") as f:
+#     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
+
 
 if df_filtrado.empty:
     st.warning("Nenhuma campanha encontrada para os critérios selecionados.")
