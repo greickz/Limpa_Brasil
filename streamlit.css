@@ -1,15 +1,23 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+
 @media screen and (max-width: 768px) {
+
     .block-container > div {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        flex-direction: row !important;
-        justify-content: space-between;
-        gap: 10px;
-        overflow-x: auto;
+        margin-bottom: 10px;
     }
 
-    .block-container > div > div {
-        flex: 1 0 auto !important;
-        min-width: 150px;
+    .element-container {
+        padding: 0 !important;
+    }
+
+    .stMetric {
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 14px;
     }
 }
