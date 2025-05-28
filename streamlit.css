@@ -1,3 +1,15 @@
-/* .st-emotion-cache-seewz2 h1{
-    color: green;
-} */
+@media screen and (max-width: 768px) {
+    .block-container > div {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        flex-direction: row !important;
+        justify-content: space-between;
+        gap: 10px;
+        overflow-x: auto;
+    }
+
+    .block-container > div > div {
+        flex: 1 0 auto !important;
+        min-width: 150px;
+    }
+}

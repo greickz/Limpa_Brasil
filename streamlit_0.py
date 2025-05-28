@@ -150,12 +150,12 @@ def load_css(file_name):
     except FileNotFoundError:
         pass
 
+load_css("streamlit.css")
+
 if df_filtrado.empty:
     st.warning("Nenhuma campanha encontrada para os critérios selecionados.")
 else:
     selecao = Menu()
     if selecao == 'Projeto Limpa Brasil':
         Home()
-
-
 
