@@ -108,7 +108,7 @@ def Home():
     )
 
     
-    tabela = {'Cidade': ['São Paulo', 'Praia Grande', 'São Vicente', 'Guarulhos', 'Indaiatuba', 'Campinas'],'Quantidade':[117,13,13,10,9,8]}
+    tabela = {'Cidade': ['São Paulo', 'Praia Grande', 'São Vicente', 'Guarulhos', 'Indaiatuba', 'Campinaas'],'Quantidade':[117,13,13,10,9,8]}
     df_tabela = pd.DataFrame(tabela)
     
 
